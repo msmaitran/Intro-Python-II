@@ -1,6 +1,5 @@
 from room import Room
 from player import Player
-# from item import Item
 
 # Declare all the rooms
 
@@ -35,20 +34,6 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-# Items 
-
-# items = {
-#     'token': Item("tokens", "not worth much"),
-#     'silver': Item("a red pouch", "filled with silver"),
-#     'gold': Item("a treasure chest", "full of gold bricks")
-# }
-
-# Add items to rooms
-# room['foyer'].items.append(items['token'])
-# room['overlook'].items.append(items['silver'])
-# room['narrow'].items.append(items['gold'])
-
-
 #
 # Main
 #
@@ -70,40 +55,32 @@ player = Player(player_name, room['outside'])
 
 while True:
     room = player.current_room
-    # item = player.current_room.items
-    # no_items = True
     print(f"\n{room.name}")
     print(f"{room.description}\n")
-    user_input = input(f"\n{player_name}, please enter one of the following commands:\nn: North, s: South, e: East, w: West,\n'get', 'take', q: Quit\n")
-    
-    # if item is not []:
-    #     print(f"{player_name} found {item.}.")
-    #     if user_input == "get" or "take":
-    #         for i in item:
-    #             print(i)
-    #         no_items = False
 
+    user_input = input(f"\n{player_name}, please enter one of the following commands:\nn: North, s: South, e: East, w: West, q: Quit\n")
+    
     if user_input in ["n", "s", "e", "w"]:
         if user_input == "n":
             if room.n_to is not None:
                 player.current_room = room.n_to
             else:
-                print("Cannot go North.")
+                print(f"\nCannot go North.")
         elif user_input == "s":
             if room.s_to is not None:
                 player.current_room = room.s_to
             else:
-                print("Cannot go South.")
+                print(f"\nCannot go South.")
         elif user_input == "e":
             if room.e_to is not None:
                 player.current_room = room.e_to
             else:
-                print("Cannot go East.")
+                print(f"\nCannot go East.")
         elif user_input == "w":
             if room.w_to is not None:
                 player.current_room = room.w_to
             else:
-                print("Cannot go West.")
+                print(f"\nCannot go West.")
     elif user_input == "q":
         print("Quitting")
         break
