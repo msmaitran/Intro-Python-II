@@ -56,11 +56,11 @@ print(player.current_room)
 valid_directions = ("n", "s", "e", "w")
 
 while True:
-    cmd = input(f"{player.name}, please select a command: ")
+    cmd = input(f"\n{player.name}, please select a command: ")
     if cmd == "q":
-        print(f"Goodbye, {player.name}!")
+        print(f"\nGoodbye, {player.name}!")
         exit(0)
     elif cmd in valid_directions:
         player.travel(cmd)
     else:
-        print(f"{player.name}, please enter a valid command.")
+        print(f"\n{player.name}, please enter a valid command.")

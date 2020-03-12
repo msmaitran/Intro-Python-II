@@ -10,7 +10,7 @@ class Room:
         self.e_to = None
         self.w_to = None
     def __str__(self):
-        return_string = f"\n{self.name}\n{self.description}\n\nCommands: {self.get_exits_string()}\n"
+        return_string = f"\n{self.name}\n{self.description}\n\nCommands: {self.get_exits_string()}"
         return return_string
     def get_exits_string(self):
         exits = []
@@ -22,6 +22,5 @@ class Room:
             exits.append("e to go EAST")
         if self.w_to:
             exits.append("w to go WEST")
-        else:
-            exits.append("q to QUIT")
+        exits.append("q to QUIT")
         return exits

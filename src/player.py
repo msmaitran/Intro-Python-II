@@ -10,4 +10,4 @@ class Player:
             self.current_room = getattr(self.current_room, f"{direction}_to")
             print(self.current_room)
         else:
-            print("You cannot move in that direction.")
+            print(f"You cannot move in that direction.\n")
