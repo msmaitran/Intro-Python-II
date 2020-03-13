@@ -2,13 +2,14 @@
 # description attributes.
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, *item):
         self.name = name
         self.description = description
         self.n_to = None
         self.s_to = None
         self.e_to = None
         self.w_to = None
+        self.item = []
     def __str__(self):
         return_string = f"\n{self.name}\n{self.description}\n\nCommands: {self.get_exits_string()}"
         return return_string
@@ -22,5 +23,5 @@ class Room:
             exits.append("e to go EAST")
         if self.w_to:
             exits.append("w to go WEST")
-        exits.append("q to QUIT")
+        exits.append("l to LOOK, q to QUIT")
         return exits

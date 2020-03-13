@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,24 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+# Items
+
+item = {
+    'flashlight': Item("flashlight", "that lights up the room"),
+    'silver': Item("pouch", "thats filled with silver"),
+    'map': Item("map", "with a location of a different treasure chest")
+}
+
+# Add items to rooms
+
+room['narrow'].item.append(item['flashlight'])
+room['treasure'].item.append(item['silver'])
+room['treasure'].item.append(item['map'])
+
+def get_item(item_name, item_list):
+    for index, find_item in enumerate(item_list):
+        return index if find_item.name.lower() == item_name.lower() else None
 #
 # Main
 #
@@ -62,5 +81,31 @@ while True:
         exit(0)
     elif cmd in valid_directions:
         player.travel(cmd)
+    elif cmd == "l":
+        player.look()
+    elif len(cmd.split()) == 2:
+        action = cmd.split()[0].lower()
+        item_name = cmd.split()[1].lower()
+        room_items = player.current_room.item
+        if (action == "get" or "take") and get_item(item_name, room_items) is not None:
+            items = get_item(item_name, room_items)
+            item_got = room_items[0]
+            item_got.get_item()
+            room_items.remove(item_got)
+            player.inventory.append(item_got)
+        if action == "drop" and get_item(item_name, player.inventory) is not None:
+            items = get_item(item_name, player.inventory)
+            item_got = player.inventory[items]
+            item_got.drop_item()
+            player.inventory.remove(item_got)
+            room_items.append(item_got)
+    elif cmd == "i":
+        if len(player.inventory) == 0:
+            print("You have no items.")
+        else:
+            print("You have the following item(s):")
+            for player_items in player.inventory:
+                print(player_items)
+            print("If you would like to drop an item, please enter 'drop' and the name of the item.")
     else:
         print(f"\n{player.name}, please enter a valid command.")
